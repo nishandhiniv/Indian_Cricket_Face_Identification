@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Indian Cricket Team Member Face Identification System"
+    >
+
+    <title>Indian Cricket Face Identification</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="navbar">
+
+        <div class="brand">
+            <div class="brand-icon">🏏</div>
+
+            <div>
+                <h1>Indian Cricket</h1>
+                <span>Face Identification</span>
+            </div>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            <span>AI System Online</span>
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    🏏 Computer Vision • Machine Learning
+                </div>
+
+                <h2>
+                    Identify the
+                    <span>Indian Cricketer</span>
+                    from an Image
+                </h2>
+
+                <p>
+                    Upload a clear image of an Indian cricket team member
+                    and let the system identify the player using
+                    face recognition technology.
+                </p>
+
+                <div class="hero-features">
+
+                    <div class="feature">
+                        <span>🎯</span>
+                        <div>
+                            <strong>Face Recognition</strong>
+                            <small>Identify player faces</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span>🤖</span>
+                        <div>
+                            <strong>Machine Learning</strong>
+                            <small>AI-powered prediction</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span>⚡</span>
+                        <div>
+                            <strong>Fast Result</strong>
+                            <small>Quick identification</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= IDENTIFICATION SECTION ================= -->
+
+        <section class="identification-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    PLAYER IDENTIFICATION
+                </span>
+
+                <h3>
+                    Upload Player Image
+                </h3>
+
+                <p>
+                    Choose an image containing one Indian cricketer's face.
+                </p>
+
+            </div>
+
+
+            <div class="identification-grid">
+
+
+                <!-- ================= UPLOAD CARD ================= -->
+
+                <div class="upload-card">
+
+                    <div
+                        class="upload-area"
+                        id="upload-area"
+                    >
+
+                        <div class="upload-icon">
+                            📷
+                        </div>
+
+                        <h4>
+                            Upload an Image
+                        </h4>
+
+                        <p>
+                            Drag & drop your image here
+                        </p>
+
+                        <span class="or-text">
+                            or
+                        </span>
+
+                        <label
+                            for="image-input"
+                            class="browse-button"
+                        >
+                            Choose Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="image-input"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <p class="supported">
+                            Supported formats: JPG, JPEG, PNG
+                        </p>
+
+                    </div>
+
+
+                    <!-- IMAGE PREVIEW -->
+
+                    <div
+                        class="preview-container"
+                        id="preview-container"
+                        hidden
+                    >
+
+                        <div class="preview-header">
+
+                            <span>
+                                Selected Image
+                            </span>
+
+                            <button
+                                type="button"
+                                id="remove-image"
+                                class="remove-button"
+                            >
+                                ✕ Remove
+                            </button>
+
+                        </div>
+
+                        <div class="preview-image-wrapper">
+
+                            <img
+                                id="image-preview"
+                                src=""
+                                alt="Selected cricket player image"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IDENTIFY BUTTON -->
+
+                    <button
+                        type="button"
+                        id="identify-button"
+                        class="identify-button"
+                        disabled
+                    >
+
+                        <span class="button-icon">🔍</span>
+
+                        <span>
+                            Identify Player
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ================= RESULT CARD ================= -->
+
+                <div class="result-card">
+
+                    <div class="result-header">
+
+                        <div>
+                            <span class="section-label">
+                                PREDICTION
+                            </span>
+
+                            <h4>
+                                Identification Result
+                            </h4>
+                        </div>
+
+                        <div class="result-status">
+                            Ready
+                        </div>
+
+                    </div>
+
+
+                    <!-- DEFAULT RESULT -->
+
+                    <div
+                        class="result-placeholder"
+                        id="result-placeholder"
+                    >
+
+                        <div class="result-placeholder-icon">
+                            🏏
+                        </div>
+
+                        <h5>
+                            No Prediction Yet
+                        </h5>
+
+                        <p>
+                            Upload a player image and click
+                            <strong>Identify Player</strong>
+                            to see the prediction.
+                        </p>
+
+                    </div>
+
+
+                    <!-- LOADING -->
+
+                    <div
+                        class="result-loading"
+                        id="result-loading"
+                        hidden
+                    >
+
+                        <div class="loader"></div>
+
+                        <h5>
+                            Analyzing Image...
+                        </h5>
+
+                        <p>
+                            Please wait while the AI system
+                            identifies the player.
+                        </p>
+
+                    </div>
+
+
+                    <!-- RESULT -->
+
+                    <div
+                        class="prediction-result"
+                        id="prediction-result"
+                        hidden
+                    >
+
+                        <div class="prediction-icon">
+                            🏆
+                        </div>
+
+                        <span class="prediction-label">
+                            IDENTIFIED PLAYER
+                        </span>
+
+                        <h5 id="player-name">
+                            Player Name
+                        </h5>
+
+                        <div class="confidence-box">
+
+                            <div class="confidence-top">
+
+                                <span>
+                                    Confidence
+                                </span>
+
+                                <strong id="confidence-value">
+                                    0%
+                                </strong>
+
+                            </div>
+
+                            <div class="confidence-bar">
+
+                                <div
+                                    class="confidence-progress"
+                                    id="confidence-progress"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                        <p
+                            class="prediction-message"
+                            id="prediction-message"
+                        >
+                            Player identified successfully.
+                        </p>
+             <!-- ================= PLAYER DETAILS ================= -->
+
+<div class="player-details-card">
+
+    <div class="details-heading">
+        <span class="details-icon">📋</span>
+        <h6>Player Details</h6>
+    </div>
+
+    <div class="details-grid">
+
+        <div class="detail-item">
+            <span class="detail-label">Speciality / Role</span>
+            <strong id="player-role">
+                Information available soon
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">State</span>
+            <strong id="player-state">
+                Information available soon
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Date of Birth</span>
+            <strong id="player-dob">
+                Information available soon
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Age</span>
+            <strong id="player-age">
+                Information available soon
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Career Status</span>
+            <strong id="player-status">
+                Information available soon
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">IPL Team</span>
+            <strong id="player-ipl-team">
+                Information available soon
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="achievement-box">
+        <span class="detail-label">🏆 Achievements</span>
+        <p id="player-achievement">
+            Information available soon
+        </p>
+    </div>
+
+</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="how-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    HOW IT WORKS
+                </span>
+
+                <h3>
+                    Simple Three-Step Process
+                </h3>
+
+                <p>
+                    The system processes the uploaded image
+                    and predicts the most likely player.
+                </p>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-icon">
+                        📤
+                    </div>
+
+                    <h4>
+                        Upload Image
+                    </h4>
+
+                    <p>
+                        Select a clear image containing
+                        the cricketer's face.
+                    </p>
+
+                </div>
+
+
+                <div class="step-arrow">
+                    →
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-icon">
+                        🧠
+                    </div>
+
+                    <h4>
+                        AI Analysis
+                    </h4>
+
+                    <p>
+                        The trained computer vision model
+                        analyzes the face in the image.
+                    </p>
+
+                </div>
+
+
+                <div class="step-arrow">
+                    →
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-icon">
+                        🎯
+                    </div>
+
+                    <h4>
+                        Get Result
+                    </h4>
+
+                    <p>
+                        The system displays the predicted
+                        cricketer and confidence score.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SYSTEM INFORMATION ================= -->
+
+        <section class="info-section">
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🧠
+                </div>
+
+                <div>
+                    <h4>
+                        Machine Learning
+                    </h4>
+
+                    <p>
+                        The system will use a trained
+                        computer vision model for player identification.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🖼️
+                </div>
+
+                <div>
+                    <h4>
+                        Image Processing
+                    </h4>
+
+                    <p>
+                        Uploaded images are processed before
+                        sending them to the recognition model.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🇮🇳
+                </div>
+
+                <div>
+                    <h4>
+                        Indian Cricketers
+                    </h4>
+
+                    <p>
+                        The project focuses on identifying
+                        selected Indian cricket team members.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h4>
+                    🏏 Indian Cricket Face Identification
+                </h4>
+
+                <p>
+                    A Machine Learning and Computer Vision project
+                    for identifying Indian cricket players from images.
+                </p>
+
+            </div>
+
+
+            <div class="footer-tech">
+
+                <span>Python</span>
+                <span>OpenCV</span>
+                <span>Machine Learning</span>
+                <span>Flask</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Internship Project
+            </span>
+
+            <span>
+                © 2026 Indian Cricket Face Identification
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+
+</body>
+</html>
